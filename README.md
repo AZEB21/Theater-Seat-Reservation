@@ -11,7 +11,6 @@ int standardSeats[STANDARD_CAPACITY] = {0};
 string patrons[TOTAL_SEATS][5]; // 0: Name, 1: Genre, 2: Age, 3: Unique ID, 4: Section  
 int patronSeatNumbers[TOTAL_SEATS];  
 int patronCount = 0;  
-kvogfso kgfoij njtrskgof kgof
 int main() {  
     int choice;  
     do {  
@@ -177,4 +176,4 @@ int main() {
 
     return 0;  
 }
-ijvfjdnbgifj njgfudojgm vnjfdkj
+

@@ -1,38 +1,24 @@
-#include <iostream>  
-#include <string>  
+#include <iostream>
+#include <vector>
 #include <iomanip>
-#include <unistd.h>
-#include <limits> // For input validation  
+#include <string>
 using namespace std;
-const int VIP_CAPACITY = 30;  
-const int STANDARD_CAPACITY = 70;  
-const int TOTAL_SEATS = VIP_CAPACITY + STANDARD_CAPACITY;  
 
-int vipSeats[VIP_CAPACITY] = {0}; // 0 means available, 1 means occupied  
-int standardSeats[STANDARD_CAPACITY] = {0};  
+// Ethiopian calendar year offset (difference from Gregorian calendar)
+const int ETHIOPIAN_YEAR_OFFSET = 8;
 
-// Multidimensional array for patron details  
-string patrons[TOTAL_SEATS][5]; // 0: Name, 1: Genre, 2: Age, 3: Unique ID, 4: Section  
-int patronSeatNumbers[TOTAL_SEATS];  
-int patronCount = 0;  
-int main() {  
-    int choice;  
-    do {  
-        system("clear");
-        cout << "\n--- Theater Seat Reservation System ---\n";  
-        cout << "1. Reserve VIP Seat\n";  
-        cout << "2. Reserve Standard Seat\n";  
-        cout << "3. Display Occupancy Status\n";  
-        cout << "4. Search Patron by Name\n";  
-        cout << "5. Exit\n";  
-        cout << "Enter your choice: ";  
+// Theater layout: 3 halls, each with rows and seats
+vector<vector<vector<bool>>> theater = {
+    {{false, false, false, false, false, false, false, false, false, false},
+     {false, false, false, false, false, false, false, false, false, false}}, // Hall 1
 
-        // Input validation for choice  
-        while (!(cin >> choice) || choice < 1 || choice > 5) {  
-            cout << "Invalid choice. Please enter a number between 1 and 5: ";  
-            cin.clear(); // Clear error state  
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input  
-        }  
+    {{false, false, false, false, false, false, false, false},
+     {false, false, false, false, false, false, false, false}}, // Hall 2
+
+    {{false, false, false, false, false, false, false, false, false, false, false, false},
+     {false, false, false, false, false, false, false, false, false, false, false, false}} // Hall 3
+};
+
 
         if (choice == 1 || choice == 2) {  
             string name, genre, section;  

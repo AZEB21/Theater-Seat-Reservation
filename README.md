@@ -1,5 +1,9 @@
-
-
+#include <iostream>  
+#include <string>  
+#include <iomanip>
+#include <unistd.h>
+#include <limits> // For input validation  
+using namespace std;
 const int VIP_CAPACITY = 30;  
 const int STANDARD_CAPACITY = 70;  
 const int TOTAL_SEATS = VIP_CAPACITY + STANDARD_CAPACITY;  

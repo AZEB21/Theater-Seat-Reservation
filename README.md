@@ -89,4 +89,53 @@ string selectedMovie = movies[movieIndex - 1];
         cout << "Invalid row number.\n";
         return;
     }
+    row -= 1;
+
+    // Select seat
+    int seat;
+    cout << "Select seat (1-" << theater[hall][row].size() << "): ";
+    cin >> seat;
+    if (seat < 1  seat > theater[hall][row].size()) {
+        cout << "Invalid seat number.\n";
+        return;
+    }
+    seat -= 1;
+
+    if (theater[hall][row][seat]) {
+        cout << "Sorry, this seat is already reserved.\n";
+        return;
+    }
+
+    // Reserve the seat
+    theater[hall][row][seat] = true;
+
+    // Select ticket type
+    string type;
+    double price;
+    cout << "\nSelect ticket type (CBIP, Regular, Premium): ";
+    cin >> type;
+    if (type == "CBIP") {
+        price = 20.00;
+    } else if (type == "Regular") {
+        price = 5.00;
+    } else if (type == "Premium") {
+        price = 15.00;
+    } else {
+        cout << "Invalid ticket type.\n";
+        return;
+    }
+
+    // Select showtime
+    cout << "\nAvailable Showtimes:\n";
+    for (size_t i = 0; i < showtimes.size(); ++i) {
+        cout << i + 1 << ". " << showtimes[i] << "\n";
+    }
+
+int showtimeIndex;
+    cout << "Select a showtime (1-" << showtimes.size() << "): ";
+    cin >> showtimeIndex;
+    if (showtimeIndex < 1  showtimeIndex > showtimes.size()) {
+        cout << "Invalid showtime selection.\n";
+        return;
+    }
       

@@ -138,4 +138,45 @@ int showtimeIndex;
         cout << "Invalid showtime selection.\n";
         return;
     }
-      
+      string selectedShowtime = showtimes[showtimeIndex - 1];
+
+    // Get date (current year, month, day assumed as input)
+    int year, month, day;
+    cout << "\nEnter today's date:\n";
+    cout << "Year (e.g., 2024): ";
+    cin >> year;
+    cout << "Month (1-12): ";
+    cin >> month;
+    cout << "Day (1-31): ";
+    cin >> day;
+
+    // Convert to Ethiopian date
+    int ethYear, ethMonth, ethDay;
+    convertToEthiopianDate(year, month, day, ethYear, ethMonth, ethDay);
+
+    // Generate ticket
+    cout << "\n--- Your Ticket ---\n";
+    cout << "Ambassador Theater\n";
+    cout << "Movie: " << selectedMovie << "\n";
+    cout << "Type: " << type << "\n";
+    cout << "Price: $" << fixed << setprecision(2) << price << "\n";
+    cout << "Hall: " << hall + 1 << "\n";
+    cout << "Row: " << row + 1 << "\n";
+    cout << "Seat: " << seat + 1 << "\n";
+    cout << "Showtime: " << selectedShowtime << "\n";
+    cout << "Date: " << ethYear << "/" << ethMonth << "/" << ethDay << " (Ethiopian Calendar)\n";
+    cout << "-------------------\n";
+}
+
+// Main function
+int main() {
+    char choice;
+    do {
+        reserveSeat();
+        cout << "\nWould you like to reserve another ticket? (y/n): ";
+        cin >> choice;
+    } while (choice == 'y' || choice == 'Y');
+
+    cout << "Thank you for using Ambassador Theater's reservation system!\n";
+    return 0;
+}

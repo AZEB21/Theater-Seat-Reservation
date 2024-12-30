@@ -73,7 +73,7 @@ string selectedMovie = movies[movieIndex - 1];
     int hall;
     cout << "\nSelect hall (1-3): ";
     cin >> hall;
-    if (hall < 1  hall > 3) {
+    if (hall < 1 || hall > 3) {
         cout << "Invalid hall number.\n";
         return;
     }
@@ -85,7 +85,7 @@ string selectedMovie = movies[movieIndex - 1];
     int row;
     cout << "Select row (1-" << theater[hall].size() << "): ";
     cin >> row;
-    if (row < 1  row > theater[hall].size()) {
+    if (row < 1 || row > theater[hall].size()) {
         cout << "Invalid row number.\n";
         return;
     }
@@ -95,7 +95,7 @@ string selectedMovie = movies[movieIndex - 1];
     int seat;
     cout << "Select seat (1-" << theater[hall][row].size() << "): ";
     cin >> seat;
-    if (seat < 1  seat > theater[hall][row].size()) {
+    if (seat < 1 || seat > theater[hall][row].size()) {
         cout << "Invalid seat number.\n";
         return;
     }
@@ -134,7 +134,7 @@ string selectedMovie = movies[movieIndex - 1];
 int showtimeIndex;
     cout << "Select a showtime (1-" << showtimes.size() << "): ";
     cin >> showtimeIndex;
-    if (showtimeIndex < 1  showtimeIndex > showtimes.size()) {
+    if (showtimeIndex < 1 || showtimeIndex > showtimes.size()) {
         cout << "Invalid showtime selection.\n";
         return;
     }

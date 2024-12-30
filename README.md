@@ -43,5 +43,29 @@ void displaySeats(int hall) {
     }
 }
 
+// Function to convert Gregorian date to Ethiopian date
+void convertToEthiopianDate(int year, int month, int day, int& ethYear, int& ethMonth, int& ethDay) {
+    ethYear = year - ETHIOPIAN_YEAR_OFFSET;
+    ethMonth = (month >= 9) ? (month - 8) : (month + 4);
+    ethDay = day;
+    if (month < 9) ethYear--; // Adjust year if before Ethiopian New Year
+}
+
+// Main reservation function
+void reserveSeat() {
+    cout << "\nWelcome to Ambassador Theater!\n";
+
+    // Select movie
+    cout << "\nAvailable Movies:\n";
+    for (size_t i = 0; i < movies.size(); ++i) {
+        cout << i + 1 << ". " << movies[i] << " (" << genres[i] << ")\n   " << trailers[i] << "\n";
+    }
+    int movieIndex;
+    cout << "Select a movie (1-" << movies.size() << "): ";
+    cin >> movieIndex;
+    if (movieIndex < 1 || movieIndex > movies.size()) {
+        cout << "Invalid movie selection.\n";
+        return;
+    }
 
       

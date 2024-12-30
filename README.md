@@ -67,5 +67,26 @@ void reserveSeat() {
         cout << "Invalid movie selection.\n";
         return;
     }
+string selectedMovie = movies[movieIndex - 1];
 
+    // Select hall
+    int hall;
+    cout << "\nSelect hall (1-3): ";
+    cin >> hall;
+    if (hall < 1  hall > 3) {
+        cout << "Invalid hall number.\n";
+        return;
+    }
+    hall -= 1;
+
+    displaySeats(hall);
+
+    // Select row
+    int row;
+    cout << "Select row (1-" << theater[hall].size() << "): ";
+    cin >> row;
+    if (row < 1  row > theater[hall].size()) {
+        cout << "Invalid row number.\n";
+        return;
+    }
       

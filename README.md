@@ -21,7 +21,7 @@ vector<vector<vector<bool>>> theater = {
 
 // Predefined movies with genres and trailers
 vector<string> movies = {"The Great Romance", "Haunted Thriller", "Action Heroes","Tropic Thunder"," Spirited away"};
-vector<string> genres = {"Romance", "Thriller", "Action"","comedy","Animation"};
+vector<string> genres = {"Romance", "Thriller", "Action","comedy","Animation"};
 vector<string> trailers = {
     "Trailer: A love story that transcends time.",
     "Trailer: A haunted house you’ll never escape from.",

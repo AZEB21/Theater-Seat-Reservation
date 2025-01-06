@@ -1,3 +1,6 @@
+// Theater Reservation System
+// This program allows users to reserve seats for movies at a theater.
+// It supports seat selection, ticket types, showtimes, and Ethiopian date conversion.
 #include <iostream>
 #include <vector>
 #include <iomanip>

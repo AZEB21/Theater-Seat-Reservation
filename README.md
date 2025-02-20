@@ -1,187 +1,83 @@
-// Theater Reservation System
-// This program allows users to reserve seats for movies at a theater.
-// It supports seat selection, ticket types, showtimes, and Ethiopian date conversion.
-#include <iostream>
-#include <vector>
-#include <iomanip>
-#include <string>
-using namespace std;
+Theater Reservation System
+This C++ program simulates a theater reservation system that allows users to reserve seats for movies. It supports seat selection, ticket types, showtimes, and Ethiopian date conversion. The program is designed to provide a user-friendly interface for managing movie reservations.
 
-// Ethiopian calendar year offset (difference from Gregorian calendar)
-const int ETHIOPIAN_YEAR_OFFSET = 8;
+Features
+Movie Selection: Choose from a list of available movies with genres and trailers.
 
-// Theater layout: 3 halls, each with rows and seats
-vector<vector<vector<bool>>> theater = {
-    {{false, false, false, false, false, false, false, false, false, false},
-     {false, false, false, false, false, false, false, false, false, false}}, // Hall 1
+Seat Reservation: Select seats from a predefined theater layout.
 
-    {{false, false, false, false, false, false, false, false},
-     {false, false, false, false, false, false, false, false}}, // Hall 2
+Ticket Types: Choose between CBIP, Regular, and Premium ticket types with different prices.
 
-    {{false, false, false, false, false, false, false, false, false, false, false, false},
-     {false, false, false, false, false, false, false, false, false, false, false, false}} // Hall 3
-};
+Showtimes: Select from available showtimes for the chosen movie.
 
-// Predefined movies with genres and trailers
-vector<string> movies = {"The Great Romance", "Haunted Thriller", "Action Heroes","Tropic Thunder"," Spirited away"};
-vector<string> genres = {"Romance", "Thriller", "Action","comedy","Animation"};
-vector<string> trailers = {
-    "Trailer: A love story that transcends time.",
-    "Trailer: A haunted house you’ll never escape from.",
-    "Trailer: Explosions, car chases, and heroic battles!",
-    "Trailer:humorously teases a chaotic jungle adventure.",
-    "Trailer: captures a young girl's magical adventure."
-};
+Ethiopian Date Conversion: Converts the Gregorian date to the Ethiopian calendar for ticket generation.
 
-// Predefined showtimes
-vector<string> showtimes = {"1:00 PM", "4:00 PM", "7:30 PM"};
+Code Structure
+The program is structured into the following components:
 
-// Function to display seats for a given hall
-void displaySeats(int hall) {
-    cout << "\nHall " << hall + 1 << " Layout:\n";
-    for (size_t row = 0; row < theater[hall].size(); ++row) {
-        cout << "Row " << row + 1 << ": ";
-        for (size_t seat = 0; seat < theater[hall][row].size(); ++seat) {
-            cout << (theater[hall][row][seat] ? "X " : "_ ");
-        }
-        cout << endl;
-    }
-}
+Theater Layout: A 3D vector representing the seating arrangement for three halls.
 
-// Function to convert Gregorian date to Ethiopian date
-void convertToEthiopianDate(int year, int month, int day, int& ethYear, int& ethMonth, int& ethDay) {
-    ethYear = year - ETHIOPIAN_YEAR_OFFSET;
-    ethMonth = (month >= 9) ? (month - 8) : (month + 4);
-    ethDay = day;
-    if (month < 9) ethYear--; // Adjust year if before Ethiopian New Year
-}
+Movie Data: Vectors storing movie names, genres, and trailers.
 
-// Main reservation function
-void reserveSeat() {
-    cout << "\nWelcome to Ambassador Theater!\n";
+Showtimes: A vector of available showtimes.
 
-    // Select movie
-    cout << "\nAvailable Movies:\n";
-    for (size_t i = 0; i < movies.size(); ++i) {
-        cout << i + 1 << ". " << movies[i] << " (" << genres[i] << ")\n   " << trailers[i] << "\n";
-    }
-    int movieIndex;
-    cout << "Select a movie (1-" << movies.size() << "): ";
-    cin >> movieIndex;
-    if (movieIndex < 1 || movieIndex > movies.size()) {
-        cout << "Invalid movie selection.\n";
-        return;
-    }
-string selectedMovie = movies[movieIndex - 1];
+Functions:
 
-    // Select hall
-    int hall;
-    cout << "\nSelect hall (1-3): ";
-    cin >> hall;
-    if (hall < 1 || hall > 3) {
-        cout << "Invalid hall number.\n";
-        return;
-    }
-    hall -= 1;
+displaySeats(int hall): Displays the seating layout for a selected hall.
 
-    displaySeats(hall);
+convertToEthiopianDate(int year, int month, int day, int& ethYear, int& ethMonth, int& ethDay): Converts Gregorian dates to Ethiopian dates.
 
-    // Select row
-    int row;
-    cout << "Select row (1-" << theater[hall].size() << "): ";
-    cin >> row;
-    if (row < 1 || row > theater[hall].size()) {
-        cout << "Invalid row number.\n";
-        return;
-    }
-    row -= 1;
+reserveSeat(): Handles the reservation process, including seat selection, ticket type, and showtime.
 
-    // Select seat
-    int seat;
-    cout << "Select seat (1-" << theater[hall][row].size() << "): ";
-    cin >> seat;
-    if (seat < 1 || seat > theater[hall][row].size()) {
-        cout << "Invalid seat number.\n";
-        return;
-    }
-    seat -= 1;
+Example Output
 
-    if (theater[hall][row][seat]) {
-        cout << "Sorry, this seat is already reserved.\n";
-        return;
-    }
+Welcome to Ambassador Theater!
 
-    // Reserve the seat
-    theater[hall][row][seat] = true;
+Available Movies:
+1. The Great Romance (Romance)
+   Trailer: A love story that transcends time.
+2. Haunted Thriller (Thriller)
+   Trailer: A haunted house you’ll never escape from.
+3. Action Heroes (Action)
+   Trailer: Explosions, car chases, and heroic battles!
+4. Tropic Thunder (comedy)
+   Trailer: humorously teases a chaotic jungle adventure.
+5. Spirited away (Animation)
+   Trailer: captures a young girl's magical adventure.
+Select a movie (1-5): 1
 
-    // Select ticket type
-    string type;
-    double price;
-    cout << "\nSelect ticket type (CBIP, Regular, Premium): ";
-    cin >> type;
-    if (type == "CBIP") {
-        price = 20.00;
-    } else if (type == "Regular") {
-        price = 5.00;
-    } else if (type == "Premium") {
-        price = 15.00;
-    } else {
-        cout << "Invalid ticket type.\n";
-        return;
-    }
+Select hall (1-3): 1
 
-    // Select showtime
-    cout << "\nAvailable Showtimes:\n";
-    for (size_t i = 0; i < showtimes.size(); ++i) {
-        cout << i + 1 << ". " << showtimes[i] << "\n";
-    }
+Hall 1 Layout:
+Row 1: _ _ _ _ _ _ _ _ _ _ 
+Row 2: _ _ _ _ _ _ _ _ _ _ 
+Select row (1-2): 1
+Select seat (1-10): 5
 
-int showtimeIndex;
-    cout << "Select a showtime (1-" << showtimes.size() << "): ";
-    cin >> showtimeIndex;
-    if (showtimeIndex < 1 || showtimeIndex > showtimes.size()) {
-        cout << "Invalid showtime selection.\n";
-        return;
-    }
-      string selectedShowtime = showtimes[showtimeIndex - 1];
+Select ticket type (CBIP, Regular, Premium): Premium
 
-    // Get date (current year, month, day assumed as input)
-    int year, month, day;
-    cout << "\nEnter today's date:\n";
-    cout << "Year (e.g., 2024): ";
-    cin >> year;
-    cout << "Month (1-12): ";
-    cin >> month;
-    cout << "Day (1-31): ";
-    cin >> day;
+Available Showtimes:
+1. 1:00 PM
+2. 4:00 PM
+3. 7:30 PM
+Select a showtime (1-3): 2
 
-    // Convert to Ethiopian date
-    int ethYear, ethMonth, ethDay;
-    convertToEthiopianDate(year, month, day, ethYear, ethMonth, ethDay);
+Enter today's date:
+Year (e.g., 2024): 2024
+Month (1-12): 10
+Day (1-31): 15
 
-    // Generate ticket
-    cout << "\n--- Your Ticket ---\n";
-    cout << "Ambassador Theater\n";
-    cout << "Movie: " << selectedMovie << "\n";
-    cout << "Type: " << type << "\n";
-    cout << "Price: $" << fixed << setprecision(2) << price << "\n";
-    cout << "Hall: " << hall + 1 << "\n";
-    cout << "Row: " << row + 1 << "\n";
-    cout << "Seat: " << seat + 1 << "\n";
-    cout << "Showtime: " << selectedShowtime << "\n";
-    cout << "Date: " << ethYear << "/" << ethMonth << "/" << ethDay << " (Ethiopian Calendar)\n";
-    cout << "-------------------\n";
-}
+--- Your Ticket ---
+Ambassador Theater
+Movie: The Great Romance
+Type: Premium
+Price: $15.00
+Hall: 1
+Row: 1
+Seat: 5
+Showtime: 4:00 PM
+Date: 2016/2/15 (Ethiopian Calendar)
+-------------------
 
-// Main function
-int main() {
-    char choice;
-    do {
-        reserveSeat();
-        cout << "\nWould you like to reserve another ticket? (y/n): ";
-        cin >> choice;
-    } while (choice == 'y' || choice == 'Y');
-
-    cout << "Thank you for using Ambassador Theater's reservation system!\n";
-    return 0;
-}
+Would you like to reserve another ticket? (y/n): n
+Thank you for using Ambassador Theater's reservation system!
